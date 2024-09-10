@@ -57,6 +57,15 @@ public:
 		StaticMesh = NewStaticMesh;
 	}
 
+	EDepth GetDepth()
+	{
+		return Depth;
+	}
+
+	static bool Compare(AActor* A, AActor* B)
+	{
+		return (int)A->GetDepth() < (int)B->GetDepth();
+	}
 
 protected:
 	int X;

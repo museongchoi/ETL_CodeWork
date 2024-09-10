@@ -1,43 +1,7 @@
 #include "Engine.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <vector>
-#include <algorithm>
-
 int main()
 {
-	//[5][4][3][1][10]
-	//[1][5][4][3][10]
-	//[1][3][5][4][10] 
-	//[1][3][4][5][10] 
-	//[1][3][4][5][10]
-	//[1][3][4][5][10]
-	//[1][3][4][5][10]
-
-	int Number[5] = { 5, 4, 3, 1, 10 };
-
-	// 5 * 5 = n * n => (n^2)
-	// logn = quicksort
-	for (int i = 0; i < 5; ++i)
-	{
-		for (int j = 0; j < 5; ++j)
-		{
-			if (Number[i] < Number[j])
-			{
-				int Temp = Number[i];
-				Number[i] = Number[j];
-				Number[j] = Temp;
-			}
-		}
-	}
-
-	for (int j = 0; j < 5; ++j)
-	{
-		printf("%d, ", Number[j]);
-	}
-
-	return 0;
 
 	char Map[10][10] = {
 		{'*','*','*','*','*','*','*','*','*','*'},

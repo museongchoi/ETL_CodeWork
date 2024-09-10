@@ -11,6 +11,8 @@
 #include "Floor.h"
 #include "Goal.h"
 
+#include <algorithm>
+
 Engine* Engine::Instance = nullptr;
 
 void Engine::Input()
@@ -100,7 +102,34 @@ void Engine::LoadLevel(char Map[10][10])
 			}
 		}
 	}
+	// 정렬 1
+	//for (int i = 0; i < Actors.size(); i++)
+	//{
+	//	for (int j = 0; j < Actors.size(); j++)
+	//	{
+	//		if ((int)Actors[i]->GetDepth() < (int)Actors[j]->GetDepth())
+	//		{
+	//			AActor* Temp = Actors[i];
+	//			Actors[i] = Actors[j];
+	//			Actors[j] = Temp;
+	//		}
+	//	}
+	//}
 
+	// 정렬 2
+	//std::sort(Actors.begin(), Actors.end(), AActor::Compare);
+
+	// 정렬 3
+	std::sort(Actors.begin(), Actors.end(), [&](AActor* A, AActor* B)
+		{
+			return (int)A->GetDepth() < (int)B->GetDepth();
+		});
+
+	// 내 정렬 코드
+	//std::sort(Actors.begin(), Actors.end(), [](AActor* A, AActor* B)
+	//{
+	//	return static_cast<int>(A->GetDepth()) < static_cast<int>(B->GetDepth());
+	//});
 
 }
 
