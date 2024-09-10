@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <stdio.h>
 #include "Engine.h"
+#include "Player.h"
 
 void AActor::Tick(int KeyCode)
 {
@@ -14,6 +15,10 @@ void AActor::Render()
 	Cur.Y = Y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Cur);
 	printf("%c", GetStaticMesh());
+}
+
+void AActor::BeginPlay()
+{
 }
 
 bool AActor::PredictCollision(int NewX, int NewY)
@@ -30,4 +35,6 @@ bool AActor::PredictCollision(int NewX, int NewY)
 	}
 	return true;
 }
+
+
 

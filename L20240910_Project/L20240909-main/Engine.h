@@ -10,6 +10,7 @@ private:
 	{
 		KeyCode = 0;
 		bIsRunning = true;
+		bWillStop = false;
 	}
 
 public:
@@ -29,11 +30,13 @@ protected:
 	void Input();
 	void Tick();
 	void Render();
+	void BeginPlay();
 
 
 	std::vector<AActor*> Actors;
 	int KeyCode;
 	bool bIsRunning;
+	bool bWillStop;
 
 	static Engine* Instance;
 
@@ -47,6 +50,10 @@ public:
 	std::vector < AActor*>& GetActors()
 	{
 		return Actors;
+	}
+	void Stop()
+	{
+		bWillStop = true;
 	}
 };
 

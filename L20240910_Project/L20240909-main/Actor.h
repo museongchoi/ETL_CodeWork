@@ -5,6 +5,7 @@ enum class EDepth
 	Floor = 5,
 	Actor = 10,
 	UI = 20,
+	GameSystem = 1000,
 	Max
 };
 
@@ -33,7 +34,8 @@ public:
 	}
 
 	virtual void Tick(int KeyCode);
-	void Render();
+	virtual void Render();
+	virtual void BeginPlay();
 
 	//acessor
 	inline int GetX()
@@ -75,8 +77,11 @@ public:
 	{
 		return (int)A->GetDepth() < (int)B->GetDepth();
 	}
+
 	ECollisionType CollisionType;
+
 	bool PredictCollision(int NewX, int NewY);
+	
 
 protected:
 	int X;
