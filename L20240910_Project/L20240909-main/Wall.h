@@ -6,6 +6,7 @@ public:
 	AWall()
 	{
 		Depth = EDepth::Actor;
+		CollisionType = ECollisionType::Collision;
 	}
 
 	virtual ~AWall()

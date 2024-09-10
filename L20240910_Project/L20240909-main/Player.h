@@ -6,6 +6,7 @@ public:
 	APlayer()
 	{
 		Depth = EDepth::Actor;
+		CollisionType = ECollisionType::Overlap;
 	}
 	virtual ~APlayer()
 	{
@@ -13,5 +14,6 @@ public:
 	}
 
 	virtual void Tick(int KeyCode) override;
+
 };
 

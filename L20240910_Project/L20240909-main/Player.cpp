@@ -4,18 +4,31 @@ void APlayer::Tick(int KeyCode)
 {
 	if (KeyCode == 'w')
 	{
-		Y--;
+		if (PredictCollision(X, Y - 1))
+		{
+			Y--;
+		}
 	}
 	if (KeyCode == 'a')
 	{
-		X--;
+		if (PredictCollision(X-1, Y))
+		{
+			X--;
+		}
 	}
 	if (KeyCode == 's')
 	{
-		Y++;
+		if (PredictCollision(X, Y + 1))
+		{
+			Y++;
+		}
 	}
 	if (KeyCode == 'd')
 	{
-		X++;
+		if (PredictCollision(X + 1, Y))
+		{
+			X++;
+		}
 	}
 }
+

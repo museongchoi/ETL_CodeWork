@@ -6,6 +6,7 @@ AMonster::AMonster()
 {
 	srand((unsigned int)time(nullptr));
 	Depth = EDepth::Actor;
+	CollisionType = ECollisionType::Overlap;
 }
 
 void AMonster::Tick(int KeyCode)
@@ -14,18 +15,30 @@ void AMonster::Tick(int KeyCode)
 
 	if (Diredction == 0)
 	{
-		Y--;
+		if (PredictCollision(X, Y - 1))
+		{
+			Y--;
+		}
 	}
 	else if (Diredction == 1)
 	{
-		X--;
+		if (PredictCollision(X - 1, Y))
+		{
+			X--;
+		}
 	}
 	else if (Diredction == 2)
 	{
-		Y++;
+		if (PredictCollision(X, Y + 1))
+		{
+			Y++;
+		}
 	}
 	else //if (Diredction == 3)
 	{
-		X++;
+		if (PredictCollision(X + 1, Y))
+		{
+			X++;
+		}
 	}
 }

@@ -42,6 +42,12 @@ public:
 	void SpawnActor(AActor* SpawnedActor);
 	void LoadLevel(const char* MapName);
 
+	// 참조자를 주지 않으면 해당 값들을 다 복사하여 준다. 화살표와 해당 값을 다 주는것. 즉, 화살표만 넘겨준다는 개념으로 참조자를 사용.
+	//std::vector < AActor*> GetActors() 
+	std::vector < AActor*>& GetActors()
+	{
+		return Actors;
+	}
 };
 
 #define GEngine			Engine::GetInstance()
