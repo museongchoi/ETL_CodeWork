@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Engine.h"
 
 #include <conio.h>
@@ -14,6 +15,16 @@
 #include <algorithm>
 
 Engine* Engine::Instance = nullptr;
+
+Engine::~Engine()
+{
+	for (auto& Actor : Actors)
+	{
+		delete Actor;
+	}
+
+	Actors.clear();
+}
 
 void Engine::Input()
 {
@@ -54,76 +65,72 @@ void Engine::SpawnActor(AActor* SpawnedActor)
 	Actors.push_back(SpawnedActor);
 }
 
-void Engine::LoadLevel(char Map[10][10])
+void Engine::LoadLevel(const char* MapName)
 {
-	for (int Y = 0; Y < 10; ++Y)
+	FILE* MapFile = fopen(MapName, "r");
+
+	char Line[100] = { 0, };
+	int Y = 0;
+
+	while (fgets(Line, 100, MapFile) != nullptr)
 	{
-		for (int X = 0; X < 10; ++X)
+		for (int X = 0; X < strlen(Line); ++X)
 		{
-			if (Map[Y][X] == '*')
+			if (Line[X] == '*')
 			{
 				AWall* Wall = new AWall();
 				Wall->SetX(X);
 				Wall->SetY(Y);
-				Wall->SetStaticMesh(Map[Y][X]);
+				Wall->SetStaticMesh(Line[X]);
 				GEngine->SpawnActor(Wall);
 			}
-			else if (Map[Y][X] == 'P')
+			else if (Line[X] == 'P')
 			{
 				APlayer* MyPlayer = new APlayer();
 				MyPlayer->SetX(X);
 				MyPlayer->SetY(Y);
-				MyPlayer->SetStaticMesh(Map[Y][X]);
+				MyPlayer->SetStaticMesh(Line[X]);
 				GEngine->SpawnActor(MyPlayer);
 			}
-			else if (Map[Y][X] == 'M')
+			else if (Line[X] == 'M')
 			{
 				AMonster* Monster = new AMonster();
 				Monster->SetX(X);
 				Monster->SetY(Y);
-				Monster->SetStaticMesh(Map[Y][X]);
+				Monster->SetStaticMesh(Line[X]);
 				GEngine->SpawnActor(Monster);
 			}
-			else if (Map[Y][X] == ' ')
+			else if (Line[X] == ' ')
 			{
 				AFloor* Floor = new AFloor();
 				Floor->SetX(X);
 				Floor->SetY(Y);
-				Floor->SetStaticMesh(Map[Y][X]);
+				Floor->SetStaticMesh(Line[X]);
 				GEngine->SpawnActor(Floor);
 			}
-			else if (Map[Y][X] == 'G')
+			else if (Line[X] == 'G')
 			{
 				AGoal* Goal = new AGoal();
 				Goal->SetX(X);
 				Goal->SetY(Y);
-				Goal->SetStaticMesh(Map[Y][X]);
+				Goal->SetStaticMesh(Line[X]);
 				GEngine->SpawnActor(Goal);
 			}
 		}
+		Y++;
 	}
-	// 정렬 1
-	//for (int i = 0; i < Actors.size(); i++)
-	//{
-	//	for (int j = 0; j < Actors.size(); j++)
-	//	{
-	//		if ((int)Actors[i]->GetDepth() < (int)Actors[j]->GetDepth())
-	//		{
-	//			AActor* Temp = Actors[i];
-	//			Actors[i] = Actors[j];
-	//			Actors[j] = Temp;
-	//		}
-	//	}
-	//}
+
+	fclose(MapFile);
+
 
 	// 정렬 2
 	//std::sort(Actors.begin(), Actors.end(), AActor::Compare);
 
 	// 정렬 3
 	std::sort(Actors.begin(), Actors.end(), [&](AActor* A, AActor* B)
-		{
+	{
 			return (int)A->GetDepth() < (int)B->GetDepth();
-		});
+	});
 
 	// 내 정렬 코드
 	//std::sort(Actors.begin(), Actors.end(), [](AActor* A, AActor* B)

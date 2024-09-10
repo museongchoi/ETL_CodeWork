@@ -23,13 +23,7 @@ public:
 		return Instance;
 	}
 
-
-
-
-	virtual ~Engine()
-	{
-
-	}
+	virtual ~Engine();
 
 protected:
 	void Input();
@@ -46,7 +40,7 @@ protected:
 public:
 	void Run();
 	void SpawnActor(AActor* SpawnedActor);
-	void LoadLevel(char Map[10][10]);
+	void LoadLevel(const char* MapName);
 
 };
 
