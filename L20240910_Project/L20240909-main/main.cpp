@@ -20,6 +20,7 @@ int SDL_main(int agrc, char* agrv[])
 
 	while (bIsRunning)
 	{
+		// 키 처리 추가
 		SDL_PollEvent(&MyEvent);
 		switch (MyEvent.type)
 		{
@@ -57,8 +58,8 @@ int SDL_main(int agrc, char* agrv[])
 		//SDL_RenderDrawRect(MyRenderer, &MyRect); // 빈 네모
 		SDL_RenderFillRect(MyRenderer, &MyRect);	// 색이 찬 네모
 
+		// 원 그리기
 		double PI = 3.1415926;
-		
 		//for (int Redius = 1; Redius < 100; ++Redius)
 		//{
 		//	for (int i = 0; i <= 360; i++)
