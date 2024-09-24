@@ -60,6 +60,13 @@ public:
 	struct SDL_Renderer* MyRenderer;
 	SDL_Event MyEvent;
 
+	Uint64 DeltaSeconds; // Uint32 로 해당 1프레임이 걸리는 시간을 나타내는 Deltaseconds 를 받으면 게임이 눕는다.
+	
+	inline const Uint64 GetWorldDeltaSeconds()
+	{
+		return DeltaSeconds;
+	}
+
 };
 
 #define GEngine			Engine::GetInstance()

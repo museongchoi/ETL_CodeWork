@@ -67,7 +67,7 @@ void Engine::Input()
 
 void Engine::Render()
 {
-	system("cls");
+	//system("cls"); // clearscreen - cls
 	SDL_SetRenderDrawColor(MyRenderer, 0xff, 0xff, 0xff, 0xff);
 	SDL_RenderClear(MyRenderer);
 
@@ -95,9 +95,13 @@ void Engine::BeginPlay()
 
 void Engine::Run()
 {
+	Uint64 StartTime;
+	Uint64 EndTime;
+
 	BeginPlay(); // 엔진 Run 시작 시 제일 처음 실행
 	while (bIsRunning)
 	{
+		StartTime = SDL_GetTicks64();
 		Input();
 
 		Tick();
@@ -109,6 +113,10 @@ void Engine::Run()
 			bIsRunning = true;
 			break;
 		}
+		EndTime = SDL_GetTicks64();
+		DeltaSeconds = EndTime - StartTime;
+
+		//printf("%d\n", DeltaSeconds);
 	}
 }
 

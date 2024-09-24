@@ -25,11 +25,11 @@ void AActor::Tick(int KeyCode)
 
 void AActor::Render()
 {
-	COORD Cur;
-	Cur.X = X;
-	Cur.Y = Y;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Cur);
-	printf("%c", GetStaticMesh());
+	//COORD Cur;
+	//Cur.X = X;
+	//Cur.Y = Y;
+	//SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Cur);
+	//printf("%c", GetStaticMesh());
 
 	SDL_SetRenderDrawColor(GEngine->MyRenderer, Color.r, Color.g, Color.b, Color.a);
 	SDL_Rect PositionRect = { X * SizeX, Y * SizeY, SizeX, SizeY };
