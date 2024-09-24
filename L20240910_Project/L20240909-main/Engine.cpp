@@ -61,7 +61,7 @@ Engine::~Engine()
 
 void Engine::Input()
 {
-	KeyCode = _getch();
+	//KeyCode = _getch();
 	SDL_PollEvent(&MyEvent);
 }
 

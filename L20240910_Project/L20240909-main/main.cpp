@@ -95,7 +95,7 @@
 
 #include "Engine.h"
 
-int main()
+int SDL_main(int agrc, char* agrv[])
 {
 
 	GEngine->LoadLevel("Level01.Map");
