@@ -87,8 +87,8 @@ protected:
 	int SizeX;
 	int SizeY;
 
-	struct SDL_Surface* Surface;
-	struct SDL_Texture* Texture;
+	struct SDL_Surface* Surface; // CPU
+	struct SDL_Texture* Texture; // GPU
 
 };
 
