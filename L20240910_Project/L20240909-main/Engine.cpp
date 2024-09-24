@@ -12,12 +12,41 @@
 #include "Floor.h"
 #include "Goal.h"
 #include "GameMode.h"
+#include "SDL.h"
 
 #include <algorithm>
 
+#pragma comment(lib, "SDL2")
+#pragma comment(lib, "SDL2main")
 
 Engine* Engine::Instance = nullptr;
 
+
+Engine::Engine()
+{
+	KeyCode = 0;
+	bIsRunning = true;
+	bWillStop = false;
+
+	Init();
+}
+
+void Engine::Init()
+{
+	SDL_Init(SDL_INIT_EVERYTHING);
+
+	MyWindow = SDL_CreateWindow("HelloWorld", 100, 100, 800, 600, SDL_WINDOW_OPENGL);
+	MyRenderer = SDL_CreateRenderer(MyWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
+	//SDL_Renderer* MyRenderer =  SDL_CreateRenderer(MyWindow, -1, SDL_RENDERER_SOFTWARE | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
+}
+
+void Engine::Term()
+{
+	SDL_DestroyRenderer(MyRenderer);
+	SDL_DestroyWindow(MyWindow);
+
+	SDL_Quit();
+}
 
 Engine::~Engine()
 {
@@ -27,16 +56,20 @@ Engine::~Engine()
 	}
 
 	Actors.clear();
+	Term();
 }
 
 void Engine::Input()
 {
 	KeyCode = _getch();
+	SDL_PollEvent(&MyEvent);
 }
 
 void Engine::Render()
 {
 	system("cls");
+	SDL_SetRenderDrawColor(MyRenderer, 0xff, 0xff, 0xff, 0xff);
+	SDL_RenderClear(MyRenderer);
 
 	//AllActorofClass->Render();
 	//for (int i = 0; i < Actors.size(); ++i)
@@ -49,6 +82,7 @@ void Engine::Render()
 		Selected->Render();
 	}
 
+	SDL_RenderPresent(MyRenderer);
 }
 
 void Engine::BeginPlay()
@@ -121,14 +155,14 @@ void Engine::LoadLevel(const char* MapName)
 				Monster->SetStaticMesh(Line[X]);
 				GEngine->SpawnActor(Monster);
 			}
-			else if (Line[X] == ' ')
-			{
-				AFloor* Floor = new AFloor();
-				Floor->SetX(X);
-				Floor->SetY(Y);
-				Floor->SetStaticMesh(Line[X]);
-				GEngine->SpawnActor(Floor);
-			}
+			//else if (Line[X] == ' ')
+			//{
+			//	AFloor* Floor = new AFloor();
+			//	Floor->SetX(X);
+			//	Floor->SetY(Y);
+			//	Floor->SetStaticMesh(Line[X]);
+			//	GEngine->SpawnActor(Floor);
+			//}
 			else if (Line[X] == 'G')
 			{
 				AGoal* Goal = new AGoal();
@@ -136,6 +170,14 @@ void Engine::LoadLevel(const char* MapName)
 				Goal->SetY(Y);
 				Goal->SetStaticMesh(Line[X]);
 				GEngine->SpawnActor(Goal);
+			}
+			if (Line[X] != '\n')
+			{
+				AFloor* Floor = new AFloor();
+				Floor->SetX(X);
+				Floor->SetY(Y);
+				Floor->SetStaticMesh(Line[X]);
+				GEngine->SpawnActor(Floor);
 			}
 		}
 		Y++;
@@ -164,11 +206,22 @@ void Engine::LoadLevel(const char* MapName)
 void Engine::Tick()
 {
 	//AllActorofClass->Tick();
-
-	if (KeyCode == 27)
+	switch (MyEvent.type)
 	{
 		bIsRunning = false;
+	case SDL_QUIT:
+		Stop();
+	case SDL_KEYDOWN:
+		switch (MyEvent.key.keysym.sym)
+		{
+		case SDLK_ESCAPE:
+			Stop();
+		}
 	}
+	//if (KeyCode == 27)
+	//{
+	//	bIsRunning = false;
+	//}
 
 	for (int i = 0; i < Actors.size(); ++i)
 	{

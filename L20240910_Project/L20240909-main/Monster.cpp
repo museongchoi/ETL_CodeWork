@@ -7,6 +7,7 @@ AMonster::AMonster()
 	srand((unsigned int)time(nullptr));
 	Depth = EDepth::Actor;
 	CollisionType = ECollisionType::Overlap;
+	Color = { 255, 0, 0, 0 };
 }
 
 void AMonster::Tick(int KeyCode)

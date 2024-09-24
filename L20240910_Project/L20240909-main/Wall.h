@@ -7,6 +7,7 @@ public:
 	{
 		Depth = EDepth::Actor;
 		CollisionType = ECollisionType::Collision;
+		Color = { 128, 128, 128, 0 };
 	}
 
 	virtual ~AWall()

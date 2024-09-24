@@ -1,4 +1,7 @@
 #pragma once
+
+#include "SDL.h"
+
 enum class EDepth
 {
 	Background = 0,
@@ -20,18 +23,9 @@ enum class ECollisionType
 class AActor
 {
 public:
-	AActor()
-	{
-		X = 10;
-		Y = 10;
-		Depth = EDepth::Background;
-		CollisionType = ECollisionType::NoCollision;
-	}
+	AActor();
 
-	virtual ~AActor()
-	{
-
-	}
+	virtual ~AActor();
 
 	virtual void Tick(int KeyCode);
 	virtual void Render();
@@ -82,12 +76,16 @@ public:
 
 	bool PredictCollision(int NewX, int NewY);
 	
+	SDL_Color Color;
 
 protected:
 	int X;
 	int Y;
 	char StaticMesh;
 	EDepth Depth;
+
+	int SizeX;
+	int SizeY;
 
 };
 

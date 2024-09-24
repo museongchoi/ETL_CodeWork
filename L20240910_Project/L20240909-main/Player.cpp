@@ -1,33 +1,38 @@
 #include "Player.h"
+#include "Engine.h"
 
 void APlayer::Tick(int KeyCode)
 {
-	if (KeyCode == 'w')
+	if (GEngine->MyEvent.type == SDL_KEYDOWN)
 	{
-		if (PredictCollision(X, Y - 1))
+		SDL_Keycode MyKeyCode = GEngine->MyEvent.key.keysym.sym;
+		if (MyKeyCode == SDLK_w || MyKeyCode == SDLK_UP)
 		{
-			Y--;
+			if (PredictCollision(X, Y - 1))
+			{
+				Y--;
+			}
 		}
-	}
-	if (KeyCode == 'a')
-	{
-		if (PredictCollision(X-1, Y))
+		if (MyKeyCode == SDLK_a || MyKeyCode == SDLK_LEFT)
 		{
-			X--;
+			if (PredictCollision(X - 1, Y))
+			{
+				X--;
+			}
 		}
-	}
-	if (KeyCode == 's')
-	{
-		if (PredictCollision(X, Y + 1))
+		if (MyKeyCode == SDLK_s || MyKeyCode == SDLK_DOWN)
 		{
-			Y++;
+			if (PredictCollision(X, Y + 1))
+			{
+				Y++;
+			}
 		}
-	}
-	if (KeyCode == 'd')
-	{
-		if (PredictCollision(X + 1, Y))
+		if (MyKeyCode == SDLK_d || MyKeyCode == SDLK_RIGHT)
 		{
-			X++;
+			if (PredictCollision(X + 1, Y))
+			{
+				X++;
+			}
 		}
 	}
 }
