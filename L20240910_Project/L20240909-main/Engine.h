@@ -14,6 +14,7 @@ private:
 	}
 
 public:
+
 	static Engine* GetInstance()
 	{
 		if (!Instance)
