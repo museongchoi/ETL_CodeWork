@@ -13,6 +13,11 @@ AMonster::AMonster()
 
 	ElapsedTime = 0;
 	ProcessTime = 500;
+
+	Surface = SDL_LoadBMP("Data/Monster.bmp");
+	SDL_SetColorKey(Surface, SDL_TRUE, SDL_MapRGB(Surface->format, 255, 255, 255));
+	Texture = SDL_CreateTextureFromSurface(GEngine->MyRenderer, Surface);
+
 }
 
 void AMonster::Tick(int KeyCode)

@@ -33,7 +33,17 @@ void AActor::Render()
 
 	SDL_SetRenderDrawColor(GEngine->MyRenderer, Color.r, Color.g, Color.b, Color.a);
 	SDL_Rect PositionRect = { X * SizeX, Y * SizeY, SizeX, SizeY };
-	SDL_RenderFillRect(GEngine->MyRenderer, &PositionRect);
+	
+	if (Texture == nullptr)
+	{
+		SDL_RenderFillRect(GEngine->MyRenderer, &PositionRect);
+	}
+	else
+	{
+		SDL_RenderCopy(GEngine->MyRenderer, Texture, nullptr, &PositionRect);
+	}
+
+	
 }
 
 void AActor::BeginPlay()
