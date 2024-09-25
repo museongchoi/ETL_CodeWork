@@ -10,6 +10,7 @@ void APlayer::Tick(int KeyCode)
 		{
 			if (PredictCollision(X, Y - 1))
 			{
+				Direction = EPlayerDirection::Up;
 				Y--;
 			}
 		}
@@ -17,6 +18,7 @@ void APlayer::Tick(int KeyCode)
 		{
 			if (PredictCollision(X - 1, Y))
 			{
+				Direction = EPlayerDirection::Left;
 				X--;
 			}
 		}
@@ -24,6 +26,7 @@ void APlayer::Tick(int KeyCode)
 		{
 			if (PredictCollision(X, Y + 1))
 			{
+				Direction = EPlayerDirection::Down;
 				Y++;
 			}
 		}
@@ -31,9 +34,49 @@ void APlayer::Tick(int KeyCode)
 		{
 			if (PredictCollision(X + 1, Y))
 			{
+				Direction = EPlayerDirection::Right;
 				X++;
 			}
 		}
+	}
+}
+
+void APlayer::Render()
+{
+	//AActor::Render();
+	SDL_SetRenderDrawColor(GEngine->MyRenderer, Color.r, Color.g, Color.b, Color.a);
+	SDL_Rect PositionRect = { X * SizeX, Y * SizeY, SizeX, SizeY };
+	int tmp = 0;
+
+	if (Texture == nullptr)
+	{
+		SDL_RenderFillRect(GEngine->MyRenderer, &PositionRect);
+	}
+	else
+	{
+		//int Direction = 0; // ¸â¹ö º¯¼ö
+		int TotalFrame = 5;
+		int AnimationTime = 200;
+
+		int SpritSizeX = Surface->w / TotalFrame;
+		int SpritSizey = Surface->h / TotalFrame;
+
+		//int Width = Surface->w;
+		//int Height = Surface->h;
+
+		static int SpriteIndex = 0;
+		static Uint64 ElapsedTime = 0;
+
+		ElapsedTime += GEngine->GetWorldDeltaSeconds();
+		if (ElapsedTime >= AnimationTime)
+		{
+			ElapsedTime = 0;
+			SpriteIndex++;
+			SpriteIndex = SpriteIndex % TotalFrame;
+		}
+
+		SDL_Rect SourceRect = { SpritSizeX * SpriteIndex, SpritSizey * (int)Direction, SpritSizeX, SpritSizey };
+		SDL_RenderCopy(GEngine->MyRenderer, Texture, &SourceRect, &PositionRect);
 	}
 }
 

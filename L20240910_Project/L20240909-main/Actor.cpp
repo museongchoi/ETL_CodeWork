@@ -42,8 +42,6 @@ void AActor::Render()
 	{
 		SDL_RenderCopy(GEngine->MyRenderer, Texture, nullptr, &PositionRect);
 	}
-
-	
 }
 
 void AActor::BeginPlay()
