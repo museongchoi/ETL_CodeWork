@@ -1,4 +1,4 @@
-L20240806_Study_01 :
+L20240806_Study_01 : MoveGame을 참고하여 클래스 생성 및 구조 파악
 
 
 MoveGame_D_Class :
