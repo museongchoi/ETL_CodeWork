@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TerminalMazeExplorer", "TerminalMazeExplorer.vcxproj", "{086E39F9-3F64-4ED5-99EB-1F302BDBF075}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{086E39F9-3F64-4ED5-99EB-1F302BDBF075}.Debug|x64.ActiveCfg = Debug|x64
+		{086E39F9-3F64-4ED5-99EB-1F302BDBF075}.Debug|x64.Build.0 = Debug|x64
+		{086E39F9-3F64-4ED5-99EB-1F302BDBF075}.Debug|x86.ActiveCfg = Debug|Win32
+		{086E39F9-3F64-4ED5-99EB-1F302BDBF075}.Debug|x86.Build.0 = Debug|Win32
+		{086E39F9-3F64-4ED5-99EB-1F302BDBF075}.Release|x64.ActiveCfg = Release|x64
+		{086E39F9-3F64-4ED5-99EB-1F302BDBF075}.Release|x64.Build.0 = Release|x64
+		{086E39F9-3F64-4ED5-99EB-1F302BDBF075}.Release|x86.ActiveCfg = Release|Win32
+		{086E39F9-3F64-4ED5-99EB-1F302BDBF075}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75605EC1-0A22-41FF-A24B-F64BF2D82E7B}
+	EndGlobalSection
+EndGlobal
